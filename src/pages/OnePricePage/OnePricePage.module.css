@@ -1,0 +1,71 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto 50px auto;
+}
+
+.topTitle {
+    color: #495057;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px;
+    text-transform: capitalize;
+    margin-top: 20px;
+}
+
+.topDescription {
+    color: #74788D;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    width: 275px;
+    margin-top: 4px;
+}
+
+.infoWrapper {
+    display: flex;
+    margin-top: 20px;
+}
+
+.leftWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmButtonWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.confirmButton {
+    width: 66px;
+    margin-top: 12px;
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--success-main, #34C38F);
+    border: none;
+
+    color: var(--text-color-white, #FFF);
+    /* Text 7/Regular */
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    /* 200% */
+    text-transform: capitalize;
+    cursor: pointer;
+}
