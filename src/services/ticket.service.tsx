@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const GET_ALL_TICKETS =
-  "https://pdf-to-txt-back.onrender.com/v1/admin/ticket/";
+  "http://157.230.50.75:8000/v1/admin/ticket/";
 
   export const getAllTickets = async (sortOption: string) => {
   try {

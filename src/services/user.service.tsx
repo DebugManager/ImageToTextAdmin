@@ -16,13 +16,13 @@ const CustomErrorIcon = () => <div style={{ color: "red" }}>✘</div>;
 
 export default CustomErrorIcon;
 
-const GET_USER_BY_ID = "https://pdf-to-txt-back.onrender.com/v1/users";
+const GET_USER_BY_ID = "http://157.230.50.75:8000/v1/users";
 const CREATE_USER =
-  "https://pdf-to-txt-back.onrender.com/v1/user-create-with-permissions/";
-const SEARCH_USERS = "https://pdf-to-txt-back.onrender.com/v1/admin/users?search=";
+  "http://157.230.50.75:8000/v1/user-create-with-permissions/";
+const SEARCH_USERS = "http://157.230.50.75:8000/v1/admin/users?search=";
 const SEARCH_USER_WITH_SORTOPTION =
-  "https://pdf-to-txt-back.onrender.com/v1/admin/users/?ordering=";
-  const EDIT_ADMIN_USER_BY_ID = 'https://pdf-to-txt-back.onrender.com/v1/admin/users';
+  "http://157.230.50.75:8000/v1/admin/users/?ordering=";
+  const EDIT_ADMIN_USER_BY_ID = 'http://157.230.50.75:8000/v1/admin/users';
 
 interface ICreateUser {
   first_name: string;
