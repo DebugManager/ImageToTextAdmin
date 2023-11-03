@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { CircleLoader } from 'react-spinners';
 import PlanCard from './PlanCard/PlanCard';
 import { getPricing } from '../../services/pricing.service';

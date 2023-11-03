@@ -41,7 +41,7 @@ const popularCountryOptions = [
 ];
 
 const customStyles: StylesConfig = {
-  control: (provided, state) => ({
+  control: (provided) => ({
     ...provided,
     height: "24px",
     display: "flex",
@@ -59,20 +59,20 @@ const customStyles: StylesConfig = {
     },
   }),
 
-  valueContainer: (provided, state) => ({
+  valueContainer: (provided) => ({
     ...provided,
     padding: "0 6px",
     fontSize: "7px",
   }),
 
-  input: (provided, state) => ({
+  input: (provided) => ({
     ...provided,
     margin: "0px",
   }),
-  indicatorSeparator: (state) => ({
+  indicatorSeparator: () => ({
     display: "none",
   }),
-  indicatorsContainer: (provided, state) => ({
+  indicatorsContainer: (provided) => ({
     ...provided,
     height: "8px",
     width: "8px",
@@ -137,7 +137,7 @@ const EditUserPage = () => {
     }),
   });
 
-  const { control, handleSubmit, reset, setValue } = useForm({
+  const { control, handleSubmit } = useForm({
     resolver: yupResolver(createValidationSchema),
   });
 

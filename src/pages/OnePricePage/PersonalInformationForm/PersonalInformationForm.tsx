@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import * as Yup from 'yup';
 import styles from './PersonalInformationForm.module.css';

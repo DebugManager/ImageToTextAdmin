@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Modal, Box } from '@mui/material';
 import { CircleLoader } from 'react-spinners';
 import { Controller, useForm } from 'react-hook-form';

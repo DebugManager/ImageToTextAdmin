@@ -1,5 +1,3 @@
-import React from 'react';
-
 import userIcon from '../../assets/ticket/user.jpeg';
 
 import styles from './MessageComponent.module.css';

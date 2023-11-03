@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select, { ActionMeta, StylesConfig } from 'react-select';
 import { Controller } from 'react-hook-form';
 import { getPricing } from '../../../services/pricing.service';
@@ -31,7 +31,7 @@ interface IChoosePlan {
 }
 
 const customStyles: StylesConfig = {
-    control: (provided, state) => ({
+    control: (provided) => ({
         ...provided,
         height: '24px',
         display: 'flex',
@@ -49,19 +49,19 @@ const customStyles: StylesConfig = {
         }
     }),
 
-    valueContainer: (provided, state) => ({
+    valueContainer: (provided) => ({
         ...provided,
         padding: '0 6px'
     }),
 
-    input: (provided, state) => ({
+    input: (provided) => ({
         ...provided,
         margin: '0px',
     }),
-    indicatorSeparator: state => ({
+    indicatorSeparator: () => ({
         display: 'none',
     }),
-    indicatorsContainer: (provided, state) => ({
+    indicatorsContainer: (provided) => ({
         ...provided,
         height: '8px',
         width: '8px'
@@ -148,7 +148,7 @@ export const ChosePlanForm = ({ control, plan, onPlanChange, typeOfPrice }: ICho
         }
     };
 
-    const handleChangePackage = (selectedOption: { value: string, label: string }, actionMeta: ActionMeta<{ value: string, label: string }>) => {
+    const handleChangePackage = (selectedOption: { value: string, label: string }) => {
         const selectedPackage = plans.find((pkg: Plan) => pkg.id.toString() === selectedOption.value);
         setSelectedPlan(selectedPackage);
         onPlanChange({ type: selectedRadio, planId: selectedPackage ? selectedPackage.id : null });

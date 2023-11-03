@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from './ChatStatusComponent.module.css';
 
 const ChatStatusComponent = () => {

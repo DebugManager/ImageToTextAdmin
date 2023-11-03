@@ -1,4 +1,3 @@
-import React from 'react';
 import { CircleLoader } from 'react-spinners';
 import styles from './PlanDetails.module.css';
 

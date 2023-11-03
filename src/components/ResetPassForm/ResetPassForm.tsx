@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { CircleLoader } from 'react-spinners';
 
@@ -14,7 +14,7 @@ interface IReset {
     isLoading: boolean,
 }
 
-const ResetPassForm = ({ onSubmit, control, errors, formOptions, isLoading }: IReset) => {
+const ResetPassForm = ({ onSubmit, control, errors, isLoading }: IReset) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 

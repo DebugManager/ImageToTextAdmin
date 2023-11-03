@@ -1,4 +1,3 @@
-import React from 'react';
 import { Controller } from 'react-hook-form';
 import { CircleLoader } from 'react-spinners';
 
@@ -15,7 +14,7 @@ interface IReset {
     isLoading: boolean,
 }
 
-const ForgotPassForm = ({ changeForm, onSubmit, control, errors, formOptions, isLoading }: IReset) => {
+const ForgotPassForm = ({ changeForm, onSubmit, control, errors, isLoading }: IReset) => {
     return (
         <div className={styles.saveWrapper}>
             <div className={styles.wrapper}>
