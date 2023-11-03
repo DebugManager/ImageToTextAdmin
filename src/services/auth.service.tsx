@@ -17,13 +17,13 @@ const CustomErrorIcon = () => <div style={{ color: "red" }}>✘</div>;
 
 export default CustomErrorIcon;
 
-const USER_REGISTRATION_URL = "https://pdf-to-txt-back.onrender.com/v1";
+const USER_REGISTRATION_URL = "http://157.230.50.75:8000/v1";
 const USER_LOGIN_URL =
-  "https://pdf-to-txt-back.onrender.com/v1/auth/token/create/";
+  "http://157.230.50.75:8000/v1/auth/token/create/";
 const USER_RESET_PASSWORD_LINK =
-  "https://pdf-to-txt-back.onrender.com/v1/auth/users/reset_password/";
+  "http://157.230.50.75:8000/v1/auth/users/reset_password/";
 const USER_RESET_PASSWORD =
-  "https://pdf-to-txt-back.onrender.com/v1/auth/users/reset_password_confirm/";
+  "http://157.230.50.75:8000/v1/auth/users/reset_password_confirm/";
 
 interface IUserRegistration {
   first_name: string;

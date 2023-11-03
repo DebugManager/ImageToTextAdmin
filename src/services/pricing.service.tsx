@@ -26,8 +26,8 @@ interface IUser {
   country?: string | number;
 }
 
-const GET_PRICING_PLANS = "https://pdf-to-txt-back.onrender.com/v1/plan";
-const BY_PACKAGE = "https://pdf-to-txt-back.onrender.com/v1/choose-plan";
+const GET_PRICING_PLANS = "http://157.230.50.75:8000/v1/plan/";
+const BY_PACKAGE = "http://157.230.50.75:8000/v1/choose-plan";
 
 export const getPricing = async (type: string) => {
   try {
@@ -40,7 +40,7 @@ export const getPricing = async (type: string) => {
 
 export const getPricingById = async (id: string | number) => {
   try {
-    const response = await axios.get(`${GET_PRICING_PLANS}/${id}`);
+    const response = await axios.get(`${GET_PRICING_PLANS}${id}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -49,7 +49,7 @@ export const getPricingById = async (id: string | number) => {
 
 export const buyPackage = async (userData: IUser, userid: string | number) => {
   try {
-    const response = await axios.put(`${BY_PACKAGE}/${userid}`, userData);
+    const response = await axios.patch(`${BY_PACKAGE}/${userid}/`, userData);
 
     if (response.data) {
       const user = await getUserById(userid);
