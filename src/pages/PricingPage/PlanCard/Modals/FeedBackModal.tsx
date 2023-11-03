@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal, Box } from '@mui/material';
 import styles from './ModalStyles.module.css';
 

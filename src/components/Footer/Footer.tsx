@@ -1,5 +1,3 @@
-import React from 'react';
-
 import FirstSubSection from './FirstSubSection/FirstSubSection';
 import { SecondSubSection } from './SecondSubSection/SecondSubSection';
 import { ThirdSubSection } from './ThirdSubSection/ThirdSubSection';

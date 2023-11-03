@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Select, { ActionMeta, StylesConfig } from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 import { Controller } from 'react-hook-form';
 import { getPricing } from '../../../services/pricing.service';
 
