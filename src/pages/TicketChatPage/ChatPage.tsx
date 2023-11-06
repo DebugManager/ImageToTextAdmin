@@ -1,19 +1,19 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { CircleLoader } from 'react-spinners';
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { CircleLoader } from "react-spinners";
 
-import { ChatStatusComponent, MessageComponent } from '../../components';
-import { getUser } from '../../services/locastorage.service';
+import { ChatStatusComponent, MessageComponent } from "../../components";
+import { getUser } from "../../services/locastorage.service";
 import {
   createChat,
   getChatById,
   getMessagesFromChat,
-} from '../../services/chat.service';
+} from "../../services/chat.service";
 
-import arrowLeft from '../../assets/ticket/arrow-sm-left.svg';
+import arrowLeft from "../../assets/ticket/arrow-sm-left.svg";
 
-import styles from './ChatPage.module.css';
+import styles from "./ChatPage.module.css";
 
 interface IMessages {
   content: string;
@@ -27,7 +27,7 @@ const ChatPage: React.FC = () => {
   const { id } = useParams();
 
   const [chatMessages, setChatMessages] = useState<IMessages[] | []>([]);
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string>("");
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [userId, setUserId] = useState<null | number>(null);
   const [isRoom, setIsRoom] = useState<boolean>(false);
@@ -47,7 +47,7 @@ const ChatPage: React.FC = () => {
         setIsRoom(true);
       }
     } catch (error) {
-      console.error(error, 'error');
+      console.error(error, "error");
     }
   }, []);
 
@@ -64,7 +64,7 @@ const ChatPage: React.FC = () => {
         setChatMessages(newMessages);
       }
     } catch (error) {
-      console.error(error, 'error');
+      console.error(error, "error");
     }
   }, []);
 
@@ -86,12 +86,12 @@ const ChatPage: React.FC = () => {
       setSocket(newSocket);
 
       newSocket.onopen = () => {
-        console.log('WebSocket Client Connected');
+        console.log("WebSocket Client Connected");
         setIsLoading(false);
       };
 
       newSocket.onclose = () => {
-        console.log('WebSocket connection closed');
+        console.log("WebSocket connection closed");
       };
     }
 
@@ -102,7 +102,8 @@ const ChatPage: React.FC = () => {
     };
   }, [isRoom]);
 
-  const sendMessage = () => {
+  const sendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
     if (socket && socket.readyState === WebSocket.OPEN && userId && id) {
       const messageToSend = {
         message: message,
@@ -110,7 +111,7 @@ const ChatPage: React.FC = () => {
       };
 
       socket.send(JSON.stringify(messageToSend));
-      setMessage('');
+      setMessage("");
     }
   };
 
@@ -144,15 +145,15 @@ const ChatPage: React.FC = () => {
       <Link
         className={styles.btnBack}
         onClick={() => window.history.back()}
-        to='#'
+        to="#"
       >
-        <img src={arrowLeft} alt='back' />
+        <img src={arrowLeft} alt="back" />
         back
       </Link>
 
       <div className={styles.chatWrapper}>
         {isLoading ? (
-          <CircleLoader loading={isLoading} color={'#556EE6'} size={20} />
+          <CircleLoader loading={isLoading} color={"#556EE6"} size={20} />
         ) : (
           <>
             <div className={styles.leftWrapper}>
@@ -169,14 +170,14 @@ const ChatPage: React.FC = () => {
                   <p className={styles.inputTitle}>Reply to Ticket</p>
                   <textarea
                     className={styles.textArea}
-                    placeholder='Text Area'
+                    placeholder="Text Area"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                   />
                   <div className={styles.buttonWrapper}>
                     <input
-                      type='submit'
-                      value='Send'
+                      type="submit"
+                      value="Send"
                       className={styles.sendButton}
                     />
                   </div>
