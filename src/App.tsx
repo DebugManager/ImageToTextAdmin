@@ -5,32 +5,35 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 
+import routes from './routes';
+import { PrivateRoutes } from './components/PrivatRoytes';
+import { OnePricePage } from './pages/OnePricePage';
+import AffiliatePage from './pages/AffiliatePage/AffiliatePage';
+
 import {
-  MainPage,
+  // MainPage,
   Auth,
-  PricingPage,
+  // PricingPage,
   ResetPassPage,
   UsersPage,
   Companies,
   NewFeature,
   Ticketpage,
   ChatPage,
-  EditUserPage
+  EditUserPage,
+  Orders,
+  OrderPage,
+  Affiliate,
 } from './pages';
 import { Layout } from './components';
 
 import './App.module.css';
-import routes from './routes';
-import { PrivateRoutes } from './components/PrivatRoytes';
-import { OnePricePage } from './pages/OnePricePage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route element={<PrivateRoutes />}>
         <Route element={<Layout />} path={routes.index}>
-          <Route element={<MainPage />} path={routes.index} />
-          <Route element={<PricingPage />} path={routes.pricing} />
           <Route element={<OnePricePage />} path={routes.pricingId} />
           <Route element={<UsersPage />} path={routes.users} />
           <Route element={<EditUserPage />} path={routes.editUserByID} />
@@ -38,8 +41,13 @@ const router = createBrowserRouter(
           <Route element={<NewFeature />} path={routes.newFeature} />
           <Route element={<Ticketpage />} path={routes.tickets} />
           <Route element={<ChatPage />} path={routes.ticketId} />
+          <Route element={<Orders />} path={routes.orders} />
+          <Route element={<OrderPage />} path={routes.orderDetails} />
+          <Route element={<Affiliate />} path={routes.affiliates} />
+          <Route element={<AffiliatePage />} path={routes.affiliatesId} />
         </Route>
       </Route>
+      <Route element={<Auth />} path='/auth/:id' />
       <Route element={<Auth />} path='/auth' />
       <Route element={<ResetPassPage />} path='/reset-password/:uuid/:token' />
     </>

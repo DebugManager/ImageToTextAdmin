@@ -4,38 +4,34 @@ import { format } from "date-fns";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 
-import {
-  deleteUserById,
-  getAllUsersWithSort,
-  searchUsers,
-} from "../../services/user.service";
-
 import { TableComponent, TableHeader } from "../../components";
 
-import styles from "./UsersPage.module.css";
+import {
+  getAllAffiliatesWithSort,
+  searchAffiliates,
+} from "../../services/affiliates.service";
+
+import styles from "./Affiliates.module.css";
 
 import editIcon from "../../assets/users-page/edit.svg";
 import deleteIcon from "../../assets/users-page/delete.svg";
 import searchIcon from "../../assets/users-page/search.svg";
 import arrowDownIcon from "../../assets/users-page/errowDown.svg";
-import clearIcon from "../../assets/users-page/x-circle.svg";
 import left from "../../assets/users-page/left.svg";
 import right from "../../assets/users-page/right.svg";
+import clearIcon from "../../assets/users-page/x-circle.svg";
 
-type User = {
-  address_line1: string;
-  city: string;
-  country: string;
-  current_plan: null | number;
-  email: string;
+type IAffiliates = {
   first_name: string;
-  id: number;
-  joined: string;
-  last_login: string;
   last_name: string;
-  role: string;
-  zip_code: number;
-  company?: string;
+  email: string;
+  users_signed_up: string | number;
+  sales: string | number;
+  commission: string | number;
+  status: boolean;
+  country: string;
+  created: string;
+  id: string | number;
 };
 
 type Row = {
@@ -52,11 +48,11 @@ type ColumnWithCustomHeader = Column<Row> & {
   customHeader: React.ReactNode;
 };
 
-const UsersPage = () => {
+const Affiliates = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [resultsFound, setResultsFound] = useState(true);
-  const [users, setUsers] = useState<User[]>([]);
+  const [affiliates, setAffiliates] = useState<IAffiliates[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [activeSortQuery, setActiveSortQuery] = useState<{
     key: string;
@@ -72,27 +68,23 @@ const UsersPage = () => {
     }[]
   >([
     { key: "first_name", direction: "ascending" },
-    { key: "last_name", direction: "ascending" },
+    { key: "id", direction: "ascending" },
     { key: "email", direction: "ascending" },
-    { key: "phone", direction: "ascending" },
-    { key: "affiliate", direction: "ascending" },
-    { key: "affiliate_code", direction: "ascending" },
-    { key: "address_line1", direction: "ascending" },
+    { key: "users_signed_up", direction: "ascending" },
+    { key: "sales", direction: "ascending" },
+    { key: "commission", direction: "ascending" },
     { key: "status", direction: "ascending" },
     { key: "country", direction: "ascending" },
-    { key: "joined", direction: "ascending" },
-    { key: "action", direction: "ascending" },
+    { key: "created", direction: "ascending" },
   ]);
-
-  const usersPerPage = 5;
 
   const fetchData = useCallback(
     async ({ key, sortDirection }: { key: string; sortDirection?: string }) => {
       setIsLoading(true);
       try {
         const sortParam = sortDirection === "descending" ? `-${key}` : key;
-        const data = await getAllUsersWithSort(sortParam);
-        setUsers(data);
+        const data = await getAllAffiliatesWithSort(sortParam);
+        setAffiliates(data.affiliates);
         setIsLoading(false);
         setResultsFound(true);
       } catch (error) {
@@ -107,20 +99,16 @@ const UsersPage = () => {
     fetchData(activeSortQuery);
   }, [fetchData, activeSortQuery]);
 
-  const handleDelete = async (id: number | string) => {
-    const data = await deleteUserById(id);
-    if (data?.status === 204) {
-      fetchData(activeSortQuery);
-    } else {
-    }
+  const handlePageClick = ({ selected }: { selected: number }) => {
+    setCurrentPage(selected);
   };
 
   const handleSearch = async () => {
     setIsLoading(true);
-    const searchedArray = await searchUsers(searchValue);
+    const searchedArray = await searchAffiliates(searchValue);
     if (searchedArray.length) {
       setIsLoading(false);
-      setUsers(searchedArray);
+      setAffiliates(searchedArray);
       setResultsFound(true);
     } else {
       setIsLoading(false);
@@ -133,8 +121,13 @@ const UsersPage = () => {
     fetchData(activeSortQuery);
   };
 
-  const handlePageClick = ({ selected }: { selected: number }) => {
-    setCurrentPage(selected);
+  const handleDelete = async (id: number | string) => {
+    console.log(id);
+    // const data = await deleteUserById(id);
+    // if (data?.status === 204) {
+    //   fetchData(activeSortQuery);
+    // } else {
+    // }
   };
 
   const sortData = (key: string) => {
@@ -156,6 +149,8 @@ const UsersPage = () => {
     setActiveSortQuery({ key, sortDirection });
   };
 
+  const ordersPerPage = 5;
+
   const columns = [
     {
       Header: (
@@ -164,8 +159,8 @@ const UsersPage = () => {
           onClick={() => sortData("first_name")}
         >
           <p>Name</p>
-          {sortOptions.find((option) => option.key === "first_name")?.direction ===
-          "ascending" ? (
+          {sortOptions.find((option) => option.key === "first_name")
+            ?.direction === "ascending" ? (
             <img
               src={arrowDownIcon}
               alt="sort"
@@ -176,10 +171,13 @@ const UsersPage = () => {
           )}
         </div>
       ),
-      width: 90,
       accessor: "full_name",
+      width: 75,
       Cell: ({ row }: { row: any }) => (
-        <div>{`${row.original.first_name} ${row.original.last_name}`}</div>
+        <Link
+          style={{ textDecoration: "none" }}
+          to={`/affiliates/${row.original.id}`}
+        >{`${row.original.first_name} ${row.original.last_name}`}</Link>
       ),
     },
     {
@@ -202,16 +200,38 @@ const UsersPage = () => {
         </div>
       ),
       accessor: "email",
-      width: 135,
+      width: 120,
     },
     {
       Header: (
         <div
           className={styles.headerTableStyles}
-          onClick={() => sortData("phone")}
+          onClick={() => sortData("users_signed_up")}
         >
-          <p>Phone</p>
-          {sortOptions.find((option) => option.key === "phone")?.direction ===
+          <p>Users Signed Up</p>
+          {sortOptions.find((option) => option.key === "users_signed_up")
+            ?.direction === "ascending" ? (
+            <img
+              src={arrowDownIcon}
+              alt="sort"
+              className={styles.imgNoRotate}
+            />
+          ) : (
+            <img src={arrowDownIcon} alt="sort" className={styles.imgRotate} />
+          )}
+        </div>
+      ),
+      accessor: "users_signed_up",
+      width: 100,
+    },
+    {
+      Header: (
+        <div
+          className={styles.headerTableStyles}
+          onClick={() => sortData("sales")}
+        >
+          <p>$ Sales</p>
+          {sortOptions.find((option) => option.key === "sales")?.direction ===
           "ascending" ? (
             <img
               src={arrowDownIcon}
@@ -223,20 +243,17 @@ const UsersPage = () => {
           )}
         </div>
       ),
-      accessor: "phone",
-      width: 90,
-      Cell: ({ row }: { row: any }) => (
-        <div>{`${row.original.phone ? row.original.phone : '-'} `}</div>
-      ),
+      accessor: "sales",
+      width: 65,
     },
     {
       Header: (
         <div
           className={styles.headerTableStyles}
-          onClick={() => sortData("affiliate")}
+          onClick={() => sortData("commission")}
         >
-          <p>Affiliate</p>
-          {sortOptions.find((option) => option.key === "affiliate")
+          <p>Commission Earned</p>
+          {sortOptions.find((option) => option.key === "commission")
             ?.direction === "ascending" ? (
             <img
               src={arrowDownIcon}
@@ -248,61 +265,8 @@ const UsersPage = () => {
           )}
         </div>
       ),
-      accessor: "affiliate",
-      width: 75,
-      Cell: ({ row }: { row: any }) => (
-        <div>{`${row.original.affiliate ? 'Yes' : 'No'} `}</div>
-      ),
-    },
-    {
-      Header: (
-        <div
-          className={styles.headerTableStyles}
-          onClick={() => sortData("affiliate_code")}
-        >
-          <p>affiliate_code</p>
-          {sortOptions.find((option) => option.key === "affiliate_code")
-            ?.direction === "ascending" ? (
-            <img
-              src={arrowDownIcon}
-              alt="sort"
-              className={styles.imgNoRotate}
-            />
-          ) : (
-            <img src={arrowDownIcon} alt="sort" className={styles.imgRotate} />
-          )}
-        </div>
-      ),
-      accessor: "affiliate_code",
-      width: 90,
-      Cell: ({ row }: { row: any }) => (
-        <div>{`${row.original.affiliate_code ? row.original.affiliate_code : '-'} `}</div>
-      ),
-    },
-    {
-      Header: (
-        <div
-          className={styles.headerTableStyles}
-          onClick={() => sortData("address_line1")}
-        >
-          <p>Address</p>
-          {sortOptions.find((option) => option.key === "address_line1")
-            ?.direction === "ascending" ? (
-            <img
-              src={arrowDownIcon}
-              alt="sort"
-              className={styles.imgNoRotate}
-            />
-          ) : (
-            <img src={arrowDownIcon} alt="sort" className={styles.imgRotate} />
-          )}
-        </div>
-      ),
-      accessor: "address_line1",
+      accessor: "commission",
       width: 120,
-      Cell: ({ row }: { row: any }) => (
-        <div>{`${row.original.address_line1 ? row.original.affiliate_code : '-'} `}</div>
-      ),
     },
     {
       Header: (
@@ -324,44 +288,25 @@ const UsersPage = () => {
         </div>
       ),
       accessor: "status",
-      width: 70,
-      Cell: ({ row }: { row: any }) => (
-        <div className={`${row.original.status && styles.successChips}`}><p>{`${row.original.status}`}</p></div>
-      ),
-    },
-    {
-      Header: (
-        <div
-          className={styles.headerTableStyles}
-          onClick={() => sortData("country")}
-        >
-          <p>Country</p>
-          {sortOptions.find((option) => option.key === "country")?.direction ===
-          "ascending" ? (
-            <img
-              src={arrowDownIcon}
-              alt="sort"
-              className={styles.imgNoRotate}
-            />
-          ) : (
-            <img src={arrowDownIcon} alt="sort" className={styles.imgRotate} />
-          )}
-        </div>
-      ),
-      accessor: "country",
       width: 75,
       Cell: ({ row }: { row: any }) => (
-        <div>{`${row.original.country ? row.original.country : '-'} `}</div>
+        <div
+          className={`${
+            row.original.status ? styles.successChips : styles.pendingChips
+          }`}
+        >
+          <p>{`${row.original.status ? "Succes" : "Pending"}`}</p>
+        </div>
       ),
     },
     {
       Header: (
         <div
           className={styles.headerTableStyles}
-          onClick={() => sortData("joined")}
+          onClick={() => sortData("contry")}
         >
-          <p>Date /Time Joined</p>
-          {sortOptions.find((option) => option.key === "joined")?.direction ===
+          <p>Country</p>
+          {sortOptions.find((option) => option.key === "contry")?.direction ===
           "ascending" ? (
             <img
               src={arrowDownIcon}
@@ -373,8 +318,30 @@ const UsersPage = () => {
           )}
         </div>
       ),
-      accessor: "joined",
-      width: 110,
+      accessor: "contry",
+      width: 75,
+    },
+    {
+      Header: (
+        <div
+          className={styles.headerTableStyles}
+          onClick={() => sortData("created")}
+        >
+          <p>Date /Time</p>
+          {sortOptions.find((option) => option.key === "created")?.direction ===
+          "ascending" ? (
+            <img
+              src={arrowDownIcon}
+              alt="sort"
+              className={styles.imgNoRotate}
+            />
+          ) : (
+            <img src={arrowDownIcon} alt="sort" className={styles.imgRotate} />
+          )}
+        </div>
+      ),
+      accessor: "created",
+      width: 75,
       Cell: ({ value }: { value: string }) => (
         <div>{format(new Date(value), "yyyy-MM-dd")}</div>
       ),
@@ -385,11 +352,12 @@ const UsersPage = () => {
           <p>Action</p>
         </div>
       ),
-      accessor: "id",
+      accessor: "orderId",
       width: 80,
       Cell: ({ row }: { row: any }) => (
         <div className={styles.btnWrapper}>
-          <Link to={`/users/${row.original.id}`}
+          <Link
+            to={`/affiliates/${row.original.id}`}
             className={styles.imageWrapper}
           >
             <img alt="edit" src={editIcon} />
@@ -412,7 +380,7 @@ const UsersPage = () => {
       width: 332,
       customHeader: (
         <div className={styles.filterWrapper}>
-          <p className={styles.filterTitle}>USER</p>
+          <p className={styles.filterTitle}>AFFILIATES</p>
         </div>
       ),
     },
@@ -463,10 +431,9 @@ const UsersPage = () => {
     },
   ];
 
-  const indexOfLastUser = (currentPage + 1) * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users?.slice(indexOfFirstUser, indexOfLastUser);
-
+  const indexOfLastOrder = (currentPage + 1) * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = affiliates?.slice(indexOfFirstOrder, indexOfLastOrder);
   return (
     <div className={styles.wrapper}>
       <div className={styles.tableWrapper}>
@@ -474,13 +441,13 @@ const UsersPage = () => {
         <TableComponent
           resultsFound={resultsFound}
           columns={columns}
-          data={currentUsers}
+          data={currentOrders}
           isLoading={isLoading}
         />
       </div>
 
       <ReactPaginate
-        pageCount={Math.ceil(users?.length / usersPerPage)}
+        pageCount={Math.ceil(affiliates?.length / ordersPerPage)}
         pageRangeDisplayed={3}
         marginPagesDisplayed={2}
         onPageChange={handlePageClick}
@@ -504,4 +471,4 @@ const UsersPage = () => {
   );
 };
 
-export default UsersPage;
+export default Affiliates;
