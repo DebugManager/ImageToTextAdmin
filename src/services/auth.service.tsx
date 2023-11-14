@@ -30,6 +30,7 @@ interface IUserRegistration {
   last_name: string;
   email: string;
   password: string;
+  unique_link?: string; 
 }
 
 interface IUserLogin {
@@ -50,7 +51,7 @@ interface IUserResetLink {
 export const userRegistration = async (userData: IUserRegistration) => {
   try {
     const response = await axios.post(
-      `${USER_REGISTRATION_URL}/auth/users/`,
+      `${USER_REGISTRATION_URL}/auth/register/`,
       userData
     );
 

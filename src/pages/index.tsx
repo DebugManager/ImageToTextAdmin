@@ -8,3 +8,6 @@ export * from './NewFeature';
 export * from './TiketPage';
 export * from './TicketChatPage';
 export * from './EditUserPage';
+export * from './Orders';
+export * from './OrderPage';
+export * from './Affiliates';

@@ -8,7 +8,11 @@ const routes = {
     companies: '/companies',
     newFeature: '/feature',
     tickets: '/tickets',
-    ticketId: '/tickets/:id'
+    ticketId: '/tickets/:id',
+    orders: '/orders',
+    orderDetails: '/order-details/:id',
+    affiliates: '/affiliates',
+    affiliatesId: '/affiliates/:id',
 }
 
 export default routes

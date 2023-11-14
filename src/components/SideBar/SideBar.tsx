@@ -3,11 +3,12 @@ import routes from '../../routes';
 
 import styles from './SideBar.module.css';
 
-import arrows from '../../assets/sidebar/arrows.svg';
+import building from '../../assets/sidebar/building-store.svg';
 import charts from '../../assets/sidebar/chart-bar.svg';
-import office from '../../assets/sidebar/office-building.svg';
+import orders from '../../assets/sidebar/shopping-bag.svg';
 import user from '../../assets/sidebar/user.svg';
 import ticket from '../../assets/sidebar/ticket.svg';
+
 
 const SideBar = () => {
     return (
@@ -31,21 +32,21 @@ const SideBar = () => {
                 
             </Link>
 
-            <Link className={styles.itemWrapper} to={routes.companies}>
+            <Link className={styles.itemWrapper} to={routes.orders}>
                 <div className={styles.iconWrapper}>
-                    <img alt='charts' src={office} className={styles.iconStyle} />
+                    <img alt='charts' src={orders} className={styles.iconStyle} />
                 </div>
 
-                <p className={styles.itemTitle}>Companies</p>
+                <p className={styles.itemTitle}>Orders</p>
             </Link>
 
-            <div className={styles.itemWrapper}>
+            <Link to={routes.affiliates} className={styles.itemWrapper}>
                 <div className={styles.iconWrapper}>
-                    <img alt='charts' src={arrows} className={styles.iconStyle} />
+                    <img alt='charts' src={building} className={styles.iconStyle} />
                 </div>
 
-                <p className={styles.itemTitle}>Conversions</p>
-            </div>
+                <p className={styles.itemTitle}>Affiliates</p>
+            </Link>
 
             <Link className={styles.itemWrapper} to={routes.tickets}>
                 
