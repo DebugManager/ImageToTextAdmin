@@ -93,7 +93,7 @@ const LoginForm = ({ changeForm, onSubmit, control, errors, isLoading }: ILogin)
                 </div>
                 <span className={styles.link} onClick={() => changeForm('forgotPasswordForm')}> Forgot Password?</span>
             </div>
-            <p className={styles.downDescriptionText}>Don’t Have an account? <span className={styles.link} onClick={() => changeForm('signUpForm')}> Register.</span></p>
+            {/* <p className={styles.downDescriptionText}>Don’t Have an account? <span className={styles.link} onClick={() => changeForm('signUpForm')}> Register.</span></p> */}
 
             <p className={styles.madedBy}>© 2023 crafted by <span className={styles.heart}></span> Outreach</p>
         </div>

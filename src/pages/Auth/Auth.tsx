@@ -42,7 +42,7 @@ const loginValidationSchema = Yup.object().shape({
 
 const Auth: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [formName, setFormName] = useState<FormType>("signUpForm");
+  const [formName, setFormName] = useState<FormType>("loginForm");
   const [formValidationSchema, setFormValidationSchema] =
     useState<Yup.AnyObjectSchema | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>();
@@ -84,7 +84,7 @@ const Auth: React.FC = () => {
         last_name: data.lastName,
         email: data.email,
         password: data.createPassword,
-        unique_link: id
+        unique_link: id,
       };
 
       const res = await userRegistration(userData);
@@ -159,7 +159,7 @@ const Auth: React.FC = () => {
           isLoading={isLoading}
         />
       )}
-      {formName === "signUpForm" && (
+      {/* {formName === "signUpForm" && (
         <SignUpForm
           changeForm={handleFormChange}
           onSubmit={handleSubmit(handleFormSubmit)}
@@ -167,7 +167,7 @@ const Auth: React.FC = () => {
           errors={errors}
           isLoading={isLoading}
         />
-      )}
+      )} */}
       {formName === "forgotPasswordForm" && (
         <ForgotPassForm
           changeForm={handleFormChange}
