@@ -1,30 +1,30 @@
 import { useState } from "react";
 
-import NotificationPopUp from "./NotificationPopUp/NotificationPopUp";
-import ProfilePopUp from "./ProfilePopUp/ProfilePopUp";
+// import NotificationPopUp from "./NotificationPopUp/NotificationPopUp";
+// import ProfilePopUp from "./ProfilePopUp/ProfilePopUp";
 
 import styles from "./Header.module.css";
 
 import moon from "../../assets/header/moon.svg";
 import flag from "../../assets/header/flag.png";
 import arrow from "../../assets/header/arrow.svg";
-import bell from "../../assets/header/bell.svg";
+// import bell from "../../assets/header/bell.svg";
 import { NotificationModal } from "./NotificationModal/NotificationModal";
 
 const Header = () => {
-  const isNotification = true;
-  const [openNotification, setOpenNotification] = useState<boolean>(false);
-  const [openPorfile, setOpenProfile] = useState<boolean>(false);
+//   const isNotification = true;
+//   const [openNotification, setOpenNotification] = useState<boolean>(false);
+//   const [openPorfile, setOpenProfile] = useState<boolean>(false);
   const [openNotificationModal, setOpenNotificationModal] =
     useState<boolean>(false);
 
-  const handleProfilePopUp = () => {
-    setOpenProfile(!openPorfile);
-  };
+//   const handleProfilePopUp = () => {
+//     setOpenProfile(!openPorfile);
+//   };
 
-  const handleOpenNotification = () => {
-    setOpenNotification(!openNotification);
-  };
+//   const handleOpenNotification = () => {
+//     setOpenNotification(!openNotification);
+//   };
 
   const handleCloseModal = () => {
     setOpenNotificationModal(false);
@@ -55,13 +55,16 @@ const Header = () => {
           <NotificationPopUp isOpen={openNotification} />
         </div> */}
 
-        <>
+        {/* <>
           <div className={styles.userData} onClick={handleProfilePopUp}>
             <p className={styles.userName}>henry</p>
             <img src={arrow} alt="moon" className={styles.arrowImage} />
           </div>
-          <ProfilePopUp isOpen={openPorfile} />
-        </>
+          <ProfilePopUp
+            isOpen={openPorfile}
+            handleProfilePopUp={handleProfilePopUp}
+          />
+        </> */}
 
         <button
           className={styles.notificationBtn}

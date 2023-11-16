@@ -137,11 +137,7 @@ const ChatPage: React.FC = () => {
       };
     }
   }, [socket, chatMessages]);
-
-  useEffect(() => {
-    console.log(isButtonLoading);
-  }, [isButtonLoading]);
-
+  
   useEffect(() => {
     if (msgWarpperRef.current) {
       msgWarpperRef.current.scrollTop = msgWarpperRef.current.scrollHeight;
