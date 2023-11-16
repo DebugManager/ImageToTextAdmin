@@ -7,6 +7,9 @@ import { CircleLoader } from 'react-spinners';
 import ReactPaginate from 'react-paginate';
 
 import { TableComponent, TableHeader } from '../../components';
+import { getAllFeatures, searchFeatures, setUnVote, setVote } from '../../services/feature.servise';
+import { FeaturesModal } from './FeaturesModal/FeaturesModal';
+import { getUser } from '../../services/locastorage.service';
 
 import styles from './NewFeature.module.css';
 
@@ -18,9 +21,7 @@ import plusIcon from '../../assets/users-page/plus.svg';
 import arrowDownIcon from '../../assets/users-page/errowDown.svg';
 import like from '../../assets/features/like.svg';
 import voted from '../../assets/features/voted.svg';
-import { getAllFeatures, searchFeatures, setUnVote, setVote } from '../../services/feature.servise';
-import { FeaturesModal } from './FeaturesModal/FeaturesModal';
-import { getUser } from '../../services/locastorage.service';
+
 
 const myCustomStyles = {
     background: 'rgba(0, 0, 0, 0.8)',
