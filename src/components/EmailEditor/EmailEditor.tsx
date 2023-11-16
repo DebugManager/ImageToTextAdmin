@@ -30,7 +30,6 @@ const EmailEditor: React.FC<EmailEditorProps> = ({
   const [editorContent, setEditorContent] = useState<string | null>(null);
 
   const handleEditorChange = (content: string) => {
-    console.log(content);
     setEditorContent(content);
   };
 

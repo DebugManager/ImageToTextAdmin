@@ -171,7 +171,6 @@ const EditUserPage = () => {
       country: data.country.label,
       phone: data.phone,
     };
-    console.log(data);
 
     if (user?.id) {
       const req = await editAdminUserById(transformedData, +user.id);
