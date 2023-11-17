@@ -60,6 +60,14 @@ const SideBar = () => {
 
         <p className={styles.itemTitle}>Email Editor</p>
       </Link>
+
+      <Link className={styles.itemWrapper} to={routes.createPages}>
+        <div className={styles.iconWrapper}>
+          <img alt="charts" src={ticket} className={styles.iconStyle} />
+        </div>
+
+        <p className={styles.itemTitle}>Create / Edit Pages</p>
+      </Link>
     </div>
   );
 };

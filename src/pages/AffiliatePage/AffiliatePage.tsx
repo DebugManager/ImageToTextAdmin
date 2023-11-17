@@ -170,7 +170,6 @@ const AffiliatePage = () => {
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     if (data.name && affiliate?.id) {
-      console.log(data.status);
       const nameParts = data.name.split(" ");
       const transformedData = {
         affiliate_id: affiliate?.id,

@@ -25,6 +25,7 @@ import {
   OrderPage,
   Affiliate,
   EmailEditPage,
+  CreatePages,
 } from './pages';
 import { Layout } from './components';
 
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
           <Route element={<Affiliate />} path={routes.affiliates} />
           <Route element={<AffiliatePage />} path={routes.affiliatesId} />
           <Route element={<EmailEditPage/>} path={routes.emailEditor}/>
+          <Route element={<CreatePages/>} path={routes.createPages}/>
         </Route>
       </Route>
       <Route element={<Auth />} path='/auth/:id' />

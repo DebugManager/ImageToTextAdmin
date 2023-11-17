@@ -1,0 +1,144 @@
+.wrapper {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .btnWrapper {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+  }
+  
+  .button {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    background: var(--main-main, #556ee6);
+    color: var(--text-color-white, #fff);
+    font-family: Poppins;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: capitalize;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+  
+  .editorWrapper{
+      margin-top: 12px;
+  }
+  
+  .filterWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+  }
+  
+  .option {
+      color: #495057;
+      font-family: Poppins;
+      font-size: 7px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+      text-transform: capitalize;
+  }
+  
+  .filter {
+      display: flex;
+      padding: 2px 8px;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 4px;
+      background: var(--text-color-60, #EFF2F7);
+  
+      color: var(--text-color-20, #495057);
+      font-family: Poppins;
+      font-size: 7px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+      text-transform: capitalize;
+      cursor: pointer;
+      margin-left: 4px;
+  }
+  
+  .optionWrapper {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      top: 20px;
+      border-radius: 4px;
+      z-index: 3;
+      font-family: Poppins;
+      font-size: 7px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+      width: 76px;
+      text-transform: capitalize;
+      background: var(--text-color-60, #EFF2F7);
+  }
+  
+  .optionFilter {
+      margin-top: 4px;
+      cursor: pointer;
+      padding: 2px 8px;
+      border-radius: 4px;
+  }
+  
+  .optionFilter:hover {
+      background: var(--text-color-60, #e5ebf4);
+  }
+  
+  .inputWrapper {
+      display: flex;
+      flex-direction: column;
+  
+      width: 200px;
+  }
+  
+  .label {
+      color: #495057;
+      font-family: Poppins;
+      font-size: 9px;
+      font-weight: 500;
+      line-height: 15px;
+  }
+  
+  .input {
+      display: flex;
+      padding: 5px 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 4px;
+      border: 1px solid var(--text-color-50, #EFF2F7);
+      background: var(--neutral-10, #FFF);
+  
+      color: var(--text-color-70, #74788D);
+      font-family: Poppins;
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+      width: 100%;
+  }
+  
+  
+  .error {
+      color: red;
+      font-family: Poppins;
+      font-size: 7px;
+      font-weight: 400;
+      line-height: 14px;
+      margin-top: 8px;
+  }

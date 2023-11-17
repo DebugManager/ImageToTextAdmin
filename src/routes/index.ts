@@ -14,6 +14,7 @@ const routes = {
   affiliates: "/affiliates",
   affiliatesId: "/affiliates/:id",
   emailEditor: "/email-editor",
+  createPages: "/create-pages"
 };
 
 export default routes;

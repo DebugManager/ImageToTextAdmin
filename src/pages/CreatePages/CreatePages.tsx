@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { CircleLoader } from "react-spinners";
-import { EmailsEnums } from "../../enums/EmailsEnums";
+import { CreatePagesEnums } from "../../enums/CreatePagesEnums";
 
 import EmailEditor from "../../components/EmailEditor/EmailEditor";
 
-import styles from "./EmailEditorPage.module.css";
+import styles from "./CreatePages.module.css";
 
 import arrow from "../../assets/header/arrow.svg";
 
-const EmailEditPage: React.FC = () => {
+const CreatePages: React.FC = () => {
   const [sendMessage, setSendMessage] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [subject, setSubject] = useState<string | null>(null);
-  const [typeOfEmail, setTypeOfEmail] = useState<EmailsEnums>(
-    EmailsEnums.Welcome
+  const [typeOfPage, setTypeOfPage] = useState<CreatePagesEnums>(
+    CreatePagesEnums.Home
   );
 
   const handleStopLoading = () => {
@@ -32,16 +32,20 @@ const EmailEditPage: React.FC = () => {
 
   const checkEmailName = (email: string): string => {
     switch (email) {
-      case EmailsEnums.Welcome:
-        return "Welcome";
-      case EmailsEnums.Affiliate_Accept:
-        return "Affiliate Accept";
-      case EmailsEnums.Affiliate_Decline:
-        return "Affiliate Decline";
-      case EmailsEnums.Order_Confirm:
-        return "Order Confirm";
-      case EmailsEnums.Reset_Pasword:
-        return "Reset Password Accept";
+      case CreatePagesEnums.Home:
+        return "Home";
+      case CreatePagesEnums.Search:
+        return "Search";
+      case CreatePagesEnums.Engage:
+        return "Engage";
+      case CreatePagesEnums.FAQ:
+        return "FAQ";
+      case CreatePagesEnums.Enrich:
+        return "Enrich";
+      case CreatePagesEnums.Opportunities:
+        return "Opportunities";
+      case CreatePagesEnums.Settings:
+        return "Settings";
       default:
         return email;
     }
@@ -49,48 +53,60 @@ const EmailEditPage: React.FC = () => {
 
   useEffect(() => {
     setIsDropdownOpen(false);
-  }, [typeOfEmail]);
+  }, [typeOfPage]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.btnWrapper}>
         <div className={styles.filterWrapper}>
-          <p className={styles.option}>View Emails Types</p>
+          <p className={styles.option}>View Pages Types</p>
           <div className={styles.filter} onClick={toggleDropdown}>
-            <p>{checkEmailName(typeOfEmail)}</p>
+            <p>{checkEmailName(typeOfPage)}</p>
             <img alt="arrow" src={arrow} className={styles.arrow} />
           </div>
           {isDropdownOpen && (
             <div className={styles.optionWrapper}>
               <div
-                onClick={() => setTypeOfEmail(EmailsEnums.Welcome)}
+                onClick={() => setTypeOfPage(CreatePagesEnums.Home)}
                 className={styles.optionFilter}
               >
-                Welcome
+                Home
               </div>
               <div
-                onClick={() => setTypeOfEmail(EmailsEnums.Affiliate_Accept)}
+                onClick={() => setTypeOfPage(CreatePagesEnums.Search)}
                 className={styles.optionFilter}
               >
-                Affiliate Accept
+                Search
               </div>
               <div
-                onClick={() => setTypeOfEmail(EmailsEnums.Affiliate_Decline)}
+                onClick={() => setTypeOfPage(CreatePagesEnums.Engage)}
                 className={styles.optionFilter}
               >
-                Affiliate Decline
+                Engage
               </div>
               <div
-                onClick={() => setTypeOfEmail(EmailsEnums.Order_Confirm)}
+                onClick={() => setTypeOfPage(CreatePagesEnums.FAQ)}
                 className={styles.optionFilter}
               >
-                Order Confirm
+                FAQ
               </div>
               <div
-                onClick={() => setTypeOfEmail(EmailsEnums.Reset_Pasword)}
+                onClick={() => setTypeOfPage(CreatePagesEnums.Enrich)}
                 className={styles.optionFilter}
               >
-                Reset Password
+                Enrich
+              </div>
+              <div
+                onClick={() => setTypeOfPage(CreatePagesEnums.Opportunities)}
+                className={styles.optionFilter}
+              >
+                Opportunities
+              </div>
+              <div
+                onClick={() => setTypeOfPage(CreatePagesEnums.Settings)}
+                className={styles.optionFilter}
+              >
+                Settings
               </div>
             </div>
           )}
@@ -122,9 +138,9 @@ const EmailEditPage: React.FC = () => {
       </div>
       <div className={styles.editorWrapper}>
         <EmailEditor
-          isEmail={true}
+          isPages={true}
           subject={subject}
-          typeOfEmail={typeOfEmail}
+          typeOfPage={typeOfPage}
           sendMessage={sendMessage}
           handleStopLoading={handleStopLoading}
         />
@@ -133,4 +149,4 @@ const EmailEditPage: React.FC = () => {
   );
 };
 
-export default EmailEditPage;
+export default CreatePages;

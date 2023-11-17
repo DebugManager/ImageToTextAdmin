@@ -12,3 +12,4 @@ export * from "./Orders";
 export * from "./OrderPage";
 export * from "./Affiliates";
 export * from "./EmailEditoPage";
+export * from "./CreatePages";
