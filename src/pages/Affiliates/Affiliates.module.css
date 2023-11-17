@@ -269,3 +269,20 @@
   text-transform: capitalize;
   justify-content: center;
 }
+
+.declinedChips {
+  display: flex;
+  padding: 0px 5px;
+  align-items: center;
+  gap: 5px;
+  border-radius: 4px;
+  background: var(--warning-main, #F46A6A);
+  color: var(--text-color-10, #fff);
+  font-family: Poppins;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
+  text-transform: capitalize;
+  justify-content: center;
+}

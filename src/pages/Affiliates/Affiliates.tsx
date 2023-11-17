@@ -20,6 +20,7 @@ import arrowDownIcon from "../../assets/users-page/errowDown.svg";
 import left from "../../assets/users-page/left.svg";
 import right from "../../assets/users-page/right.svg";
 import clearIcon from "../../assets/users-page/x-circle.svg";
+import { AffiliatesStatusEnums } from "../../enums/AffiliatesEnums";
 
 type IAffiliates = {
   first_name: string;
@@ -291,11 +292,19 @@ const Affiliates = () => {
       width: 75,
       Cell: ({ row }: { row: any }) => (
         <div
-          className={`${
-            row.original.status ? styles.successChips : styles.pendingChips
-          }`}
+          className={`
+        ${
+          row.original.status === AffiliatesStatusEnums.Pending
+            ? styles.pendingChips
+            : row.original.status === AffiliatesStatusEnums.Success
+            ? styles.successChips
+            : row.original.status === AffiliatesStatusEnums.Decline
+            ? styles.declinedChips
+            : ""
+        }
+      `}
         >
-          <p>{`${row.original.status ? "Succes" : "Pending"}`}</p>
+          <p>{`${row.original.status}`}</p>
         </div>
       ),
     },
