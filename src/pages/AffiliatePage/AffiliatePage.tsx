@@ -13,6 +13,7 @@ import {
 } from "../../services/affiliates.service";
 
 import styles from "./AffiliatePage.module.css";
+import { AffiliatesStatusEnums } from "../../enums/AffiliatesEnums";
 
 const myCustomStyles = {
   background: "rgba(0, 0, 0, 0.8)",
@@ -28,8 +29,8 @@ const CustomCheckmark = () => <div style={{ color: "#556EE6" }}>✔</div>;
 const CustomErrorIcon = () => <div style={{ color: "red" }}>✘</div>;
 
 const typeOptions = [
-  { value: "True", label: "Success" },
-  { value: "False", label: "Pending" },
+  { value: AffiliatesStatusEnums.Success, label: "Approve" },
+  { value: AffiliatesStatusEnums.Decline, label: "Decline" },
 ];
 
 const popularCountryOptions = [
@@ -169,7 +170,7 @@ const AffiliatePage = () => {
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     if (data.name && affiliate?.id) {
-        console.log(data.status);
+      console.log(data.status);
       const nameParts = data.name.split(" ");
       const transformedData = {
         affiliate_id: affiliate?.id,
@@ -378,7 +379,7 @@ const AffiliatePage = () => {
                     onChange={(selectedOption) => {
                       field.onChange(selectedOption);
                     }}
-                    placeholder={affiliate.status ? "Success" : "Pending"}
+                    placeholder={affiliate.status}
                   />
                 )}
               />

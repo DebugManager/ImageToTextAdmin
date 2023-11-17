@@ -21,23 +21,28 @@ const CustomErrorIcon = () => <div style={{ color: "red" }}>✘</div>;
 interface EmailEditorProps {
   sendMessage: boolean;
   handleStopLoading: () => void;
+  typeOfEmail: string;
+  subject: string | null;
 }
 
 const EmailEditor: React.FC<EmailEditorProps> = ({
   sendMessage,
   handleStopLoading,
+  typeOfEmail,
+  subject
 }) => {
   const [editorContent, setEditorContent] = useState<string | null>(null);
 
   const handleEditorChange = (content: string) => {
+    console.log(content);
     setEditorContent(content);
   };
 
   const sendNewEmail = async () => {
-    if (editorContent && sendMessage) {
-      const res = await sendCreatedEmail(editorContent);
+    if (editorContent && sendMessage && typeOfEmail && subject?.length) {
+      const res = await sendCreatedEmail(editorContent, typeOfEmail, subject);
       if (res) {
-        toast.success("You voted successfully", {
+        toast.success("Email edited successfully", {
           position: "top-right",
           autoClose: 3000,
           className: "my-custom-toast",
