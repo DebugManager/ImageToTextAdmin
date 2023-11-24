@@ -1,3 +1,1 @@
-# ImageToTextAdmin
-
-Checkout on the MASTER branch
+# ImageToTextAdmin on MASTER branch
